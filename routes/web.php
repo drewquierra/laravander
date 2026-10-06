@@ -1,23 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
-// Perfume Landing Page
-Route::get('/', function () {
-    return view('landing');
-});
+// Custom Views
+Route::get('/', function () { return view('landing'); });
+use App\Http\Controllers\Auth\LoginController;
 
-// Register / Sign Up Form
-Route::get('/register', function () {
-    return view('home');
-});
+// 1. Loads the login view (GET)
+Route::get('/login', [LoginController::class, 'create'])->name('login');
 
-// Login Form
-Route::get('/login', function () {
-    return view('login');
-});
+// 2. Processes the login form submission (POST)
+Route::post('/login', [LoginController::class, 'store']);
+Route::get('/forgot-password', function () { return view('forgot-password'); });
 
-// Forgot Password Form
-Route::get('/forgot-password', function () {
-    return view('forgot-password');
-});
+// Registration Routes
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store']);

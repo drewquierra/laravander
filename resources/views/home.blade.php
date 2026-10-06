@@ -106,6 +106,15 @@
         <p class="subtitle">START YOUR JOURNEY</p>
         <h1 class="title">CREATE ACCOUNT</h1>
 
+        @if ($errors->any())
+            <div style="color: #ff4444; font-size: 13px; margin-bottom: 15px; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 8px;">
+                <ul style="list-style: none;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="/register" method="POST">
             @csrf
             <div class="input-box">
